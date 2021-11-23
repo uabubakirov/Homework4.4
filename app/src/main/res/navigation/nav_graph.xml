@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/characterNavigation">
+
+    <fragment
+        android:id="@+id/characterNavigation"
+        android:name="com.example.homework44.ui.fragments.character.CharacterFragment"
+        android:label="fragment_character"
+        tools:layout="@layout/fragment_character" >
+
+    </fragment>
+    <fragment
+        android:id="@+id/detailCharacterFragment"
+        android:name="com.example.homework44.ui.fragments.character.detailfragment.DetailCharacterFragment"
+        android:label="fragment_detail_character"
+        tools:layout="@layout/fragment_detail_character" >
+
+    </fragment>
+    <fragment
+        android:id="@+id/episodesNavigation"
+        android:name="com.example.homework44.ui.fragments.episode.EpisodeFragment"
+        android:label="fragment_episode"
+        tools:layout="@layout/fragment_episode" />
+    <fragment
+        android:id="@+id/locationNavigation"
+        android:name="com.example.homework44.ui.fragments.location.LocationFragment"
+        android:label="fragment_location"
+        tools:layout="@layout/fragment_location" />
+    <fragment
+        android:id="@+id/episodeDetailFragment"
+        android:name="com.example.homework44.ui.fragments.episode.detailfragment.EpisodeDetailFragment"
+        android:label="fragment_episode_detail"
+        tools:layout="@layout/fragment_episode_detail" />
+    <fragment
+        android:id="@+id/locationDetailFragment"
+        android:name="com.example.homework44.ui.fragments.location.detailfragment.LocationDetailFragment"
+        android:label="fragment_location_detail"
+        tools:layout="@layout/fragment_location_detail" />
+</navigation>
