@@ -1,33 +1,33 @@
 package com.example.homework44.ui.fragments.character;
 
-import android.os.Bundle;
-
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
-import com.example.homework44.App;
 import com.example.homework44.data.network.dtos.character.Characters;
 import com.example.homework44.data.repositories.CharacterRepositories;
-import com.example.homework44.ui.fragments.base.BaseViewModel;
-import com.example.homework44.ui.fragments.character.detailfragment.DetailCharacterFragment;
+import com.example.homework44.base.BaseViewModel;
 
 import java.util.ArrayList;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import javax.inject.Inject;
 
+import dagger.hilt.android.lifecycle.HiltViewModel;
+
+@HiltViewModel
 public class CharacterViewModel extends BaseViewModel {
-    CharacterRepositories characterRepositories = new CharacterRepositories();
-    int page = 1;
-    int idCharacter;
+   private final CharacterRepositories repositories;
+   int page = 1;
+   int idCharacter;
+    @Inject
+    public CharacterViewModel(CharacterRepositories repositories) {
+        this.repositories = repositories;
+    }
 
     public LiveData<ArrayList<Characters>> fetchCharacters(){
-        return characterRepositories.fetchCharacters(page);
+        return repositories.fetchCharacters(page);
     }
 
     public LiveData<Characters> fetchCharacter(int id){
-        return characterRepositories.fetchCharacter(id);
+        return repositories.fetchCharacter(id);
     }
 
 }

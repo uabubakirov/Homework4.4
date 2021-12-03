@@ -2,7 +2,6 @@ package com.example.homework44.ui.fragments.location.detailfragment;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -10,14 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.homework44.R;
 import com.example.homework44.data.network.dtos.location.Locations;
 import com.example.homework44.databinding.FragmentLocationDetailBinding;
-import com.example.homework44.ui.fragments.base.BaseFragment;
+import com.example.homework44.base.BaseFragment;
 import com.example.homework44.ui.fragments.location.LocationViewModel;
-import com.example.homework44.utils.Keys;
 
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class LocationDetailFragment extends BaseFragment<LocationViewModel, FragmentLocationDetailBinding> {
 
 
@@ -30,7 +29,7 @@ public class LocationDetailFragment extends BaseFragment<LocationViewModel, Frag
 
     @Override
     protected void setupObservers() {
-        viewModel.fetchLocation(getArguments().getInt(Keys.KEY_ID)).observe(getViewLifecycleOwner(), new Observer<Locations>() {
+        viewModel.fetchLocation(LocationDetailFragmentArgs.fromBundle(getArguments()).getId()).observe(getViewLifecycleOwner(), new Observer<Locations>() {
             @Override
             public void onChanged(Locations locations) {
                 binding.txtName.setText(locations.getName());

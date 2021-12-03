@@ -19,18 +19,20 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.ViewHold
     private ArrayList<Episodes> list = new ArrayList<>();
     OnItemClickEpisode onItemClickEpisode;
 
-    public void addEpisodes(ArrayList<Episodes> list){
+    public void addEpisodes(ArrayList<Episodes> list) {
         this.list.addAll(list);
         notifyDataSetChanged();
     }
-    public void onCLick(OnItemClickEpisode onItemClickEpisode){
-        this.onItemClickEpisode=onItemClickEpisode;
+
+    public void onCLick(OnItemClickEpisode onItemClickEpisode) {
+        this.onItemClickEpisode = onItemClickEpisode;
     }
+
     @NonNull
     @NotNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        return new ViewHolder(EpisodesItemsBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false));
+        return new ViewHolder(EpisodesItemsBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
@@ -45,11 +47,13 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         EpisodesItemsBinding binding;
+
         public ViewHolder(@NonNull @NotNull EpisodesItemsBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
-        private void onFill(Episodes s){
+
+        private void onFill(Episodes s) {
             binding.txtName.setText(s.getName());
             binding.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override

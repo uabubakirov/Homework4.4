@@ -1,4 +1,4 @@
-package com.example.homework44.ui.fragments.base;
+package com.example.homework44.base;
 
 import android.os.Bundle;
 import android.view.View;

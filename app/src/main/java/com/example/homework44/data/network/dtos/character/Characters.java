@@ -1,9 +1,13 @@
 package com.example.homework44.data.network.dtos.character;
 
-import com.google.gson.annotations.SerializedName;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+@Entity
 public class Characters {
     @SerializedName("id")
+    @PrimaryKey
     private int id;
     @SerializedName("name")
     private String name;
