@@ -59,7 +59,7 @@ public class EpisodeAdapter extends ListAdapter<Episodes,EpisodeAdapter.ViewHold
             binding.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemClickEpisode.onClick(s.getId());
+                    onItemClickEpisode.onClick(s.getId(),s.getName());
                 }
             });
 

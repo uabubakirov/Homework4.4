@@ -44,8 +44,9 @@ public class EpisodeFragment extends BaseFragment<EpisodeViewModel, FragmentEpis
     protected void setupListeners() {
         adapter.onCLick(new OnItemClickEpisode() {
             @Override
-            public void onClick(int id) {
-                Navigation.findNavController(requireView()).navigate(EpisodeFragmentDirections.actionEpisodesNavigationToEpisodeDetailFragment(id));
+            public void onClick(int id, String name) {
+                Navigation.findNavController(requireView()).navigate(EpisodeFragmentDirections.actionEpisodesNavigationToEpisodeDetailFragment(id,name));
+                viewModel.page = 1;
             }
         });
     }

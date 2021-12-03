@@ -51,20 +51,26 @@
     <fragment
         android:id="@+id/episodeDetailFragment"
         android:name="com.example.homework44.ui.fragments.episode.detailfragment.EpisodeDetailFragment"
-        android:label="fragment_episode_detail"
+        android:label="{label}"
         tools:layout="@layout/fragment_episode_detail" >
         <argument
             android:name="id"
             app:argType="integer" />
+        <argument
+            android:name="label"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/locationDetailFragment"
         android:name="com.example.homework44.ui.fragments.location.detailfragment.LocationDetailFragment"
-        android:label="fragment_location_detail"
+        android:label="{label}"
         tools:layout="@layout/fragment_location_detail" >
         <argument
             android:name="id"
             app:argType="integer" />
+        <argument
+            android:name="label"
+            app:argType="string" />
     </fragment>
     <dialog
         android:id="@+id/imageFragment"

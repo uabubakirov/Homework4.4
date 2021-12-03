@@ -43,8 +43,9 @@ public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLo
     protected void setupListeners() {
         adapter.onCLick(new OnItemClickLocation() {
             @Override
-            public void onClick(int id) {
-                Navigation.findNavController(requireView()).navigate(LocationFragmentDirections.actionLocationNavigationToLocationDetailFragment(id));
+            public void onClick(int id, String name) {
+                Navigation.findNavController(requireView()).navigate(LocationFragmentDirections.actionLocationNavigationToLocationDetailFragment(id,name));
+                viewModel.page = 1;
             }
         });
     }

@@ -60,7 +60,7 @@ public class LocationAdapter extends ListAdapter<Locations, LocationAdapter.View
             binding.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemClickLocation.onClick(s.getId());
+                    onItemClickLocation.onClick(s.getId(),s.getName());
                 }
             });
 
