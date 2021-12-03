@@ -1,5 +1,6 @@
 package com.example.homework44.ui.adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -20,17 +22,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.ViewHolder> {
-    private ArrayList<Characters> list = new ArrayList<>();
+public class CharacterAdapter extends ListAdapter<Characters, CharacterAdapter.ViewHolder> {
+
     OnItemClickCharacter onItemClickCharacter;
     OnLongItemClick onLongItemClick;
 
-
-    public void addData(ArrayList<Characters> characters) {
-        this.list.addAll(characters);
-        notifyDataSetChanged();
+    public CharacterAdapter() {
+        super(new CharactersComparator());
     }
-
     public void onCLick(OnItemClickCharacter onItemClickCharacter) {
         this.onItemClickCharacter = onItemClickCharacter;
     }
@@ -48,13 +47,10 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
-        holder.onFill(list.get(position));
+        holder.onFill(getItem(position));
     }
 
-    @Override
-    public int getItemCount() {
-        return list.size();
-    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         CharactersItemsBinding binding;
@@ -76,5 +72,19 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.View
             });
         }
     }
+    public static class CharactersComparator extends DiffUtil.ItemCallback<Characters>{
+        @Override
+        public boolean areItemsTheSame(@NonNull @NotNull Characters oldItem, @NonNull @NotNull Characters newItem) {
+            return oldItem.getId() == newItem.getId();
+        }
+
+
+        @SuppressLint("DiffUtilEquals")
+        @Override
+        public boolean areContentsTheSame(@NonNull @NotNull Characters oldItem, @NonNull @NotNull Characters newItem) {
+            return oldItem.equals(newItem);
+        }
+    }
+
 
 }

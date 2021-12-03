@@ -8,11 +8,13 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.homework44.data.network.dtos.location.Locations;
 import com.example.homework44.databinding.FragmentLocationDetailBinding;
 import com.example.homework44.base.BaseFragment;
 import com.example.homework44.ui.fragments.location.LocationViewModel;
+import com.example.homework44.utils.Toasts;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -29,6 +31,7 @@ public class LocationDetailFragment extends BaseFragment<LocationViewModel, Frag
 
     @Override
     protected void setupObservers() {
+        if (internetCheck(getContext())){
         viewModel.fetchLocation(LocationDetailFragmentArgs.fromBundle(getArguments()).getId()).observe(getViewLifecycleOwner(), new Observer<Locations>() {
             @Override
             public void onChanged(Locations locations) {
@@ -36,7 +39,9 @@ public class LocationDetailFragment extends BaseFragment<LocationViewModel, Frag
                 binding.txtDimension.setText(locations.getDimension());
                 binding.txtType.setText(locations.getType());
             }
-        });
+        });}else {
+            Toast.makeText(getContext(), Toasts.NO_INTERNET_DF,Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

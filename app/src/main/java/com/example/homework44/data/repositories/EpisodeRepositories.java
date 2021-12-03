@@ -3,7 +3,7 @@ package com.example.homework44.data.repositories;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.homework44.App;
+import com.example.homework44.data.local.daos.EpisodeDao;
 import com.example.homework44.data.network.apiservice.EpisodeApi;
 import com.example.homework44.data.network.dtos.RickAndMortyResponse;
 import com.example.homework44.data.network.dtos.episode.Episodes;
@@ -18,9 +18,11 @@ import retrofit2.Response;
 
 public class EpisodeRepositories {
     private final EpisodeApi episodeApi;
+    private final EpisodeDao episodeDao;
     @Inject
-    public EpisodeRepositories(EpisodeApi episodeApi) {
+    public EpisodeRepositories(EpisodeApi episodeApi, EpisodeDao episodeDao) {
         this.episodeApi = episodeApi;
+        this.episodeDao = episodeDao;
     }
 
 
@@ -31,7 +33,10 @@ public class EpisodeRepositories {
             @Override
             public void onResponse(Call<RickAndMortyResponse<Episodes>> call, Response<RickAndMortyResponse<Episodes>> response) {
                 if (response.body() != null) {
-                    data.setValue(response.body().getResults());
+                    ArrayList<Episodes> episodes = new ArrayList<>();
+                    episodes = response.body().getResults();
+                    episodeDao.insertAll(episodes);
+                    data.setValue(episodes);
                 }
             }
 

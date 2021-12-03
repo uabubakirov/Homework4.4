@@ -15,4 +15,11 @@ import dagger.hilt.android.HiltAndroidApp;
 @HiltAndroidApp
 public class App extends Application {
 
+    public static CharacterDao characterDao;
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        RoomClient roomClient = new RoomClient();
+        characterDao = roomClient.provideCharacterDao(roomClient.provideDatabase(this));
+    }
 }

@@ -1,7 +1,12 @@
 package com.example.homework44.ui.fragments.character;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
@@ -12,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.homework44.App;
 import com.example.homework44.data.network.dtos.character.Characters;
@@ -20,6 +26,9 @@ import com.example.homework44.databinding.FragmentCharacterBinding;
 import com.example.homework44.ui.adapters.CharacterAdapter;
 import com.example.homework44.base.BaseFragment;
 import com.example.homework44.utils.OnItemClickCharacter;
+import com.example.homework44.utils.Toasts;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -39,6 +48,15 @@ public class CharacterFragment extends BaseFragment<CharacterViewModel, Fragment
         binding = FragmentCharacterBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
+
+    @Override
+    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+    }
+
+
+
 
     @Override
     protected void initialize() {
@@ -64,32 +82,39 @@ public class CharacterFragment extends BaseFragment<CharacterViewModel, Fragment
 
     @Override
     protected void setupRequests() {
+
+        if (internetCheck(getContext())){
         binding.progressbarItems.setVisibility(View.VISIBLE);
-        viewModel.fetchCharacters().observe(getViewLifecycleOwner(), new Observer<ArrayList<Characters>>() {
-            @Override
-            public void onChanged(ArrayList<Characters> characters) {
-                adapter.addData(characters);
-                binding.progressbarItems.setVisibility(View.GONE);
-            }
-        });
-        binding.rvCharacters.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if (!recyclerView.canScrollVertically(1) && dy > 0) {
-                    binding.progressbar.setVisibility(View.VISIBLE);
-                    viewModel.page++;
-                    viewModel.fetchCharacters().observe(getViewLifecycleOwner(), new Observer<ArrayList<Characters>>() {
-                        @Override
-                        public void onChanged(ArrayList<Characters> characters) {
-                            adapter.addData(characters);
-                            binding.progressbar.setVisibility(View.GONE);
-                        }
-                    });
-
-
+        viewModel.fetchCharacters().observe(getViewLifecycleOwner(), characters -> {
+            adapter.submitList(characters);
+            binding.progressbarItems.setVisibility(View.GONE);
+            binding.rvCharacters.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    if (!recyclerView.canScrollVertically(1) && dy > 0) {
+                        binding.progressbar.setVisibility(View.VISIBLE);
+                        viewModel.page++;
+                        viewModel.fetchCharacters().observe(getViewLifecycleOwner(), new Observer<ArrayList<Characters>>() {
+                            @Override
+                            public void onChanged(ArrayList<Characters> characters) {
+                                ArrayList arrayList = new ArrayList(adapter.getCurrentList());
+                                arrayList.addAll(characters);
+                                adapter.submitList(arrayList);
+                                binding.progressbar.setVisibility(View.GONE);
+                            }
+                        });
+                    }
                 }
-            }
+            });
         });
+        }else{
+            Toast.makeText(getContext(), Toasts.NO_INTERNET,Toast.LENGTH_SHORT).show();
+            adapter.submitList(viewModel.getDataFromDb());
+
+
+
+        }
+
     }
 
     @Override

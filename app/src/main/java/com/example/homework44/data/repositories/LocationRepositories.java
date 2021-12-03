@@ -3,7 +3,7 @@ package com.example.homework44.data.repositories;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.homework44.App;
+import com.example.homework44.data.local.daos.LocationDao;
 import com.example.homework44.data.network.apiservice.LocationApi;
 import com.example.homework44.data.network.dtos.RickAndMortyResponse;
 import com.example.homework44.data.network.dtos.location.Locations;
@@ -18,9 +18,11 @@ import retrofit2.Response;
 
 public class LocationRepositories {
     private final LocationApi locationApi;
+    private final LocationDao locationDao;
     @Inject
-    public LocationRepositories(LocationApi locationApi) {
+    public LocationRepositories(LocationApi locationApi, LocationDao locationDao) {
         this.locationApi = locationApi;
+        this.locationDao = locationDao;
     }
 
     public LiveData<ArrayList<Locations>> fetchLocations(int page){
@@ -29,7 +31,10 @@ public class LocationRepositories {
             @Override
             public void onResponse(Call<RickAndMortyResponse<Locations>> call, Response<RickAndMortyResponse<Locations>> response) {
                 if (response.body()!=null) {
-                    data.setValue(response.body().getResults());
+                    ArrayList<Locations> locations = new ArrayList<>();
+                    locations = response.body().getResults();
+                    locationDao.insertAll(locations);
+                    data.setValue(locations);
                 }
 
             }

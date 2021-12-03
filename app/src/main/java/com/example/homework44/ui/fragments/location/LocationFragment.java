@@ -12,12 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.homework44.data.network.dtos.location.Locations;
 import com.example.homework44.databinding.FragmentLocationBinding;
 import com.example.homework44.ui.adapters.LocationAdapter;
 import com.example.homework44.base.BaseFragment;
 import com.example.homework44.utils.OnItemClickLocation;
+import com.example.homework44.utils.Toasts;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -49,31 +51,38 @@ public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLo
 
     @Override
     protected void setupObservers() {
+        if(internetCheck(getContext())){
         binding.progressbarItems.setVisibility(View.VISIBLE);
         viewModel.fetchLocations().observe(getViewLifecycleOwner(), new Observer<ArrayList<Locations>>() {
             @Override
             public void onChanged(ArrayList<Locations> locations) {
-                adapter.addLocations(locations);
+                adapter.submitList(locations);
                 binding.progressbarItems.setVisibility(View.GONE);
-            }
-        });
-        binding.rvLocation.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull @NotNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if (!recyclerView.canScrollVertically(1) && dy > 0) {
-                    binding.progressbar.setVisibility(View.VISIBLE);
-                    viewModel.page++;
-                    viewModel.fetchLocations().observe(getViewLifecycleOwner(), new Observer<ArrayList<Locations>>() {
-                        @Override
-                        public void onChanged(ArrayList<Locations> locations) {
-                            adapter.addLocations(locations);
-                            binding.progressbar.setVisibility(View.GONE);
+                binding.rvLocation.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrolled(@NonNull @NotNull RecyclerView recyclerView, int dx, int dy) {
+                        super.onScrolled(recyclerView, dx, dy);
+                        if (!recyclerView.canScrollVertically(1) && dy > 0) {
+                            binding.progressbar.setVisibility(View.VISIBLE);
+                            viewModel.page++;
+                            viewModel.fetchLocations().observe(getViewLifecycleOwner(), new Observer<ArrayList<Locations>>() {
+                                @Override
+                                public void onChanged(ArrayList<Locations> locations) {
+                                    ArrayList arrayList = new ArrayList(adapter.getCurrentList());
+                                    arrayList.addAll(locations);
+                                    adapter.submitList(arrayList);
+                                    binding.progressbar.setVisibility(View.GONE);
+                                }
+                            });
                         }
-                    });
-                }
+                    }
+                });
             }
-        });
+        });}else {
+            Toast.makeText(getContext(), Toasts.NO_INTERNET,Toast.LENGTH_SHORT).show();
+            adapter.submitList(viewModel.getDataFromDb());
+        }
+
     }
 
     @Override

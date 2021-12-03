@@ -4,6 +4,8 @@ import com.example.homework44.data.network.apiservice.CharacterApi;
 import com.example.homework44.data.network.apiservice.EpisodeApi;
 import com.example.homework44.data.network.apiservice.LocationApi;
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -12,6 +14,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
     OkHttpClient okHttpClient = new OkHttpClient.Builder()
             .addInterceptor(provideLoggingInterceptor())
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30,TimeUnit.SECONDS)
+            .readTimeout(30,TimeUnit.SECONDS)
             .build();
 
     private HttpLoggingInterceptor provideLoggingInterceptor(){

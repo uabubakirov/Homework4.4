@@ -1,13 +1,17 @@
 package com.example.homework44.ui.adapters;
 
+import android.annotation.SuppressLint;
 import android.location.Location;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.homework44.data.network.dtos.episode.Episodes;
 import com.example.homework44.data.network.dtos.location.Locations;
 import com.example.homework44.databinding.LocationItemsBinding;
 import com.example.homework44.utils.OnItemClickLocation;
@@ -16,14 +20,16 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHolder> {
+public class LocationAdapter extends ListAdapter<Locations, LocationAdapter.ViewHolder> {
 
-    private ArrayList<Locations> list = new ArrayList<>();
+
     private OnItemClickLocation onItemClickLocation;
-    public void addLocations(ArrayList<Locations> locations){
-        this.list.addAll(locations);
-        notifyDataSetChanged();
+
+    public LocationAdapter() {
+        super(new LocationComparator());
     }
+
+
     public void onCLick(OnItemClickLocation onItemClickLocation){
         this.onItemClickLocation=onItemClickLocation;
     }
@@ -38,13 +44,10 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
-        holder.onFill(list.get(position));
+        holder.onFill(getItem(position));
     }
 
-    @Override
-    public int getItemCount() {
-        return list.size();
-    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         LocationItemsBinding binding;
@@ -61,6 +64,19 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
                 }
             });
 
+        }
+    }
+    public static class LocationComparator extends DiffUtil.ItemCallback<Locations> {
+
+        @Override
+        public boolean areItemsTheSame(@NonNull @NotNull Locations oldItem, @NonNull @NotNull Locations newItem) {
+            return oldItem.getId() == newItem.getId();
+        }
+
+        @SuppressLint("DiffUtilEquals")
+        @Override
+        public boolean areContentsTheSame(@NonNull @NotNull Locations oldItem, @NonNull @NotNull Locations newItem) {
+            return oldItem == newItem;
         }
     }
 }

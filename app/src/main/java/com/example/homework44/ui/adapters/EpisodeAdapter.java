@@ -1,12 +1,16 @@
 package com.example.homework44.ui.adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.homework44.data.network.dtos.character.Characters;
 import com.example.homework44.data.network.dtos.episode.Episodes;
 import com.example.homework44.databinding.EpisodesItemsBinding;
 import com.example.homework44.utils.OnItemClickEpisode;
@@ -15,14 +19,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.ViewHolder> {
-    private ArrayList<Episodes> list = new ArrayList<>();
+public class EpisodeAdapter extends ListAdapter<Episodes,EpisodeAdapter.ViewHolder> {
+
     OnItemClickEpisode onItemClickEpisode;
 
-    public void addEpisodes(ArrayList<Episodes> list) {
-        this.list.addAll(list);
-        notifyDataSetChanged();
+    public EpisodeAdapter() {
+        super(new EpisodeComparator());
     }
+
 
     public void onCLick(OnItemClickEpisode onItemClickEpisode) {
         this.onItemClickEpisode = onItemClickEpisode;
@@ -37,13 +41,10 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
-        holder.onFill(list.get(position));
+        holder.onFill(getItem(position));
     }
 
-    @Override
-    public int getItemCount() {
-        return list.size();
-    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         EpisodesItemsBinding binding;
@@ -64,4 +65,16 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.ViewHold
 
         }
     }
-}
+    public static class EpisodeComparator extends DiffUtil.ItemCallback<Episodes>{
+
+        @Override
+        public boolean areItemsTheSame(@NonNull @NotNull Episodes oldItem, @NonNull @NotNull Episodes newItem) {
+            return oldItem.getId() == newItem.getId();
+        }
+
+        @SuppressLint("DiffUtilEquals")
+        @Override
+        public boolean areContentsTheSame(@NonNull @NotNull Episodes oldItem, @NonNull @NotNull Episodes newItem) {
+            return oldItem == newItem;
+        }
+    }}

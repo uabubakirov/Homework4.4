@@ -6,18 +6,17 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.homework44.data.network.dtos.character.Characters;
+import com.example.homework44.data.network.dtos.episode.Episodes;
+import com.example.homework44.data.network.dtos.location.Locations;
 
 import java.util.ArrayList;
 import java.util.List;
-
 @Dao
-public interface CharacterDao {
+public interface EpisodeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(ArrayList<Characters> characters);
+    void insertAll(ArrayList<Episodes> episodes);
     @Delete
-    void delete(Characters characters);
-    @Query("SELECT * FROM characters")
-    List<Characters> getAll();
-
+    void delete(Episodes episodes);
+    @Query("SELECT * FROM episodes")
+    List<Episodes> getAll();
 }

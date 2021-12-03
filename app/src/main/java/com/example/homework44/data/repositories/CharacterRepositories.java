@@ -1,16 +1,13 @@
 package com.example.homework44.data.repositories;
 
-import android.widget.Toast;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.homework44.App;
+import com.example.homework44.data.local.daos.CharacterDao;
 import com.example.homework44.data.network.apiservice.CharacterApi;
 import com.example.homework44.data.network.dtos.RickAndMortyResponse;
 import com.example.homework44.data.network.dtos.character.Characters;
-import com.example.homework44.ui.fragments.character.CharacterViewModel;
 
 import java.util.ArrayList;
 
@@ -22,17 +19,24 @@ import retrofit2.Response;
 
 public class CharacterRepositories {
     private final CharacterApi characterApi;
+    private final CharacterDao characterDao;
+
 
     @Inject
-    public CharacterRepositories(CharacterApi characterApi) {
+    public CharacterRepositories(CharacterApi characterApi, CharacterDao characterDao) {
         this.characterApi = characterApi;
+        this.characterDao = characterDao;
     }
+
     public LiveData<ArrayList<Characters>> fetchCharacters(int page) {
         MutableLiveData<ArrayList<Characters>> data = new MutableLiveData();
         characterApi.fetchCharacters(page).enqueue(new Callback<RickAndMortyResponse<Characters>>() {
             @Override
             public void onResponse(Call<RickAndMortyResponse<Characters>> call, Response<RickAndMortyResponse<Characters>> response) {
-                data.setValue(response.body().getResults());
+                ArrayList<Characters> characters = new ArrayList<>();
+                characters = response.body().getResults();
+                characterDao.insertAll(characters);
+                data.setValue(characters);
             }
 
             @Override
@@ -56,7 +60,6 @@ public class CharacterRepositories {
             }
         });
         return data;
-
     }
 }
 

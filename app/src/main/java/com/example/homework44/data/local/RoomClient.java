@@ -5,6 +5,8 @@ import android.content.Context;
 import androidx.room.Room;
 
 import com.example.homework44.data.local.daos.CharacterDao;
+import com.example.homework44.data.local.daos.EpisodeDao;
+import com.example.homework44.data.local.daos.LocationDao;
 
 public class RoomClient {
     public AppDatabase provideDatabase(Context context){
@@ -15,6 +17,12 @@ public class RoomClient {
     }
     public CharacterDao provideCharacterDao(AppDatabase database){
         return database.characterDao();
+    }
+    public LocationDao provideLocationDao(AppDatabase database){
+        return database.locationDao();
+    }
+    public EpisodeDao provideEpisodeDao(AppDatabase database){
+        return database.episodeDao();
     }
 
 }

@@ -10,12 +10,14 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.homework44.data.network.dtos.character.Characters;
 import com.example.homework44.databinding.FragmentDetailCharacterBinding;
 import com.example.homework44.base.BaseFragment;
 import com.example.homework44.ui.fragments.character.CharacterViewModel;
+import com.example.homework44.utils.Toasts;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -48,6 +50,7 @@ public class DetailCharacterFragment extends BaseFragment<CharacterViewModel, Fr
 
     @Override
     protected void setupRequests() {
+        if (internetCheck(getContext())){
         viewModel.fetchCharacter(DetailCharacterFragmentArgs.fromBundle(getArguments()).getId()).observe(getViewLifecycleOwner(), new Observer<Characters>() {
             @Override
             public void onChanged(Characters characters) {
@@ -58,6 +61,9 @@ public class DetailCharacterFragment extends BaseFragment<CharacterViewModel, Fr
                 binding.txtStatus.setText(characters.getStatus());
             }
         });
+        }else {
+            Toast.makeText(getContext(), Toasts.NO_INTERNET_DF,Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

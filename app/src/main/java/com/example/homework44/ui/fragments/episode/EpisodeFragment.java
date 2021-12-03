@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.homework44.data.network.dtos.episode.Episodes;
 import com.example.homework44.data.repositories.EpisodeRepositories;
@@ -18,6 +19,7 @@ import com.example.homework44.databinding.FragmentEpisodeBinding;
 import com.example.homework44.ui.adapters.EpisodeAdapter;
 import com.example.homework44.base.BaseFragment;
 import com.example.homework44.utils.OnItemClickEpisode;
+import com.example.homework44.utils.Toasts;
 
 import java.util.ArrayList;
 
@@ -58,33 +60,40 @@ public class EpisodeFragment extends BaseFragment<EpisodeViewModel, FragmentEpis
 
     @Override
     protected void setupObservers() {
+        if (internetCheck(getContext())){
         binding.progressbarItems.setVisibility(View.VISIBLE);
         viewModel.fetchEpisodes().observe(getViewLifecycleOwner(), new Observer<ArrayList<Episodes>>() {
             @Override
             public void onChanged(ArrayList<Episodes> episodes) {
-                adapter.addEpisodes(episodes);
+                adapter.submitList(episodes);
                 binding.progressbarItems.setVisibility(View.GONE);
-            }
-        });
+                binding.rvEpisodes.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                        if (!recyclerView.canScrollVertically(1) && dy > 0) {
+                            binding.progressbar.setVisibility(View.VISIBLE);
+                            viewModel.page++;
+                            viewModel.fetchEpisodes().observe(getViewLifecycleOwner(), new Observer<ArrayList<Episodes>>() {
+                                @Override
+                                public void onChanged(ArrayList<Episodes> list) {
+                                    ArrayList arrayList = new ArrayList(adapter.getCurrentList());
+                                    arrayList.addAll(episodes);
+                                    adapter.submitList(arrayList);
+                                    binding.progressbar.setVisibility(View.GONE);
 
-
-        binding.rvEpisodes.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if (!recyclerView.canScrollVertically(1) && dy > 0) {
-                    binding.progressbar.setVisibility(View.VISIBLE);
-                    viewModel.page++;
-                    viewModel.fetchEpisodes().observe(getViewLifecycleOwner(), new Observer<ArrayList<Episodes>>() {
-                        @Override
-                        public void onChanged(ArrayList<Episodes> list) {
-                            adapter.addEpisodes(list);
-                            binding.progressbar.setVisibility(View.GONE);
-
+                                }
+                            });
                         }
-                    });
-                }
+                    }
+                });
             }
-        });
+        });}else {
+            Toast.makeText(getContext(), Toasts.NO_INTERNET,Toast.LENGTH_SHORT).show();
+            adapter.submitList(viewModel.getDataFromDb());
+        }
+
+
+
 
     }
 }

@@ -1,8 +1,12 @@
 package com.example.homework44.data.network.dtos.location;
 
-import com.google.gson.annotations.SerializedName;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+@Entity
 public class Locations {
+    @PrimaryKey
     @SerializedName("id")
     private int id;
     @SerializedName("name")
