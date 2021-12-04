@@ -91,6 +91,7 @@ public class CharacterFragment extends BaseFragment<CharacterViewModel, Fragment
                             @Override
                             public void onChanged(ArrayList<Characters> characters) {
                                 if (!internetCheck(requireContext())){
+                                    adapter.submitList(viewModel.getDataFromDb());
                                     binding.progressbar.setVisibility(View.GONE);
                                 }else {
                                     ArrayList arrayList = new ArrayList(adapter.getCurrentList());
