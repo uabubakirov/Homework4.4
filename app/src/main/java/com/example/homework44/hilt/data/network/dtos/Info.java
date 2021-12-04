@@ -1,4 +1,4 @@
-package com.example.homework44.data.network.dtos;
+package com.example.homework44.hilt.data.network.dtos;
 
 import com.google.gson.annotations.SerializedName;
 

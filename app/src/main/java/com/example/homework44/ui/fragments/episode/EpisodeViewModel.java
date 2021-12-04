@@ -2,9 +2,9 @@ package com.example.homework44.ui.fragments.episode;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.homework44.data.local.daos.EpisodeDao;
-import com.example.homework44.data.network.dtos.episode.Episodes;
-import com.example.homework44.data.repositories.EpisodeRepositories;
+import com.example.homework44.hilt.data.local.daos.EpisodeDao;
+import com.example.homework44.hilt.data.network.dtos.episode.Episodes;
+import com.example.homework44.hilt.data.repositories.EpisodeRepositories;
 import com.example.homework44.base.BaseViewModel;
 
 import java.util.ArrayList;

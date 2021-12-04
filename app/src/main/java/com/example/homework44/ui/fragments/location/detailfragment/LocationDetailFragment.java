@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.homework44.data.network.dtos.location.Locations;
+import com.example.homework44.hilt.data.network.dtos.location.Locations;
 import com.example.homework44.databinding.FragmentLocationDetailBinding;
 import com.example.homework44.base.BaseFragment;
 import com.example.homework44.ui.fragments.location.LocationViewModel;

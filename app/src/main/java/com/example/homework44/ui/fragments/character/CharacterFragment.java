@@ -1,15 +1,11 @@
 package com.example.homework44.ui.fragments.character;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,13 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.homework44.App;
-import com.example.homework44.data.network.dtos.character.Characters;
-import com.example.homework44.data.repositories.CharacterRepositories;
+import com.example.homework44.hilt.data.network.dtos.character.Characters;
+import com.example.homework44.hilt.data.repositories.CharacterRepositories;
 import com.example.homework44.databinding.FragmentCharacterBinding;
 import com.example.homework44.ui.adapters.CharacterAdapter;
 import com.example.homework44.base.BaseFragment;
-import com.example.homework44.utils.OnItemClickCharacter;
 import com.example.homework44.utils.Toasts;
 
 import org.jetbrains.annotations.NotNull;

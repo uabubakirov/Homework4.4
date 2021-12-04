@@ -2,9 +2,9 @@ package com.example.homework44.ui.fragments.location;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.homework44.data.local.daos.LocationDao;
-import com.example.homework44.data.network.dtos.location.Locations;
-import com.example.homework44.data.repositories.LocationRepositories;
+import com.example.homework44.hilt.data.local.daos.LocationDao;
+import com.example.homework44.hilt.data.network.dtos.location.Locations;
+import com.example.homework44.hilt.data.repositories.LocationRepositories;
 import com.example.homework44.base.BaseViewModel;
 
 import java.util.ArrayList;

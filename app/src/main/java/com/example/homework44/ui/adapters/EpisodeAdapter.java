@@ -10,14 +10,11 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.homework44.data.network.dtos.character.Characters;
-import com.example.homework44.data.network.dtos.episode.Episodes;
+import com.example.homework44.hilt.data.network.dtos.episode.Episodes;
 import com.example.homework44.databinding.EpisodesItemsBinding;
 import com.example.homework44.utils.OnItemClickEpisode;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
 
 public class EpisodeAdapter extends ListAdapter<Episodes,EpisodeAdapter.ViewHolder> {
 

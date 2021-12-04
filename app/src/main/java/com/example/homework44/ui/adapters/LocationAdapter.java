@@ -1,7 +1,6 @@
 package com.example.homework44.ui.adapters;
 
 import android.annotation.SuppressLint;
-import android.location.Location;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +10,11 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.homework44.data.network.dtos.episode.Episodes;
-import com.example.homework44.data.network.dtos.location.Locations;
+import com.example.homework44.hilt.data.network.dtos.location.Locations;
 import com.example.homework44.databinding.LocationItemsBinding;
 import com.example.homework44.utils.OnItemClickLocation;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
 
 public class LocationAdapter extends ListAdapter<Locations, LocationAdapter.ViewHolder> {
 

@@ -13,8 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.homework44.data.network.dtos.episode.Episodes;
-import com.example.homework44.data.repositories.EpisodeRepositories;
+import com.example.homework44.hilt.data.network.dtos.episode.Episodes;
 import com.example.homework44.databinding.FragmentEpisodeBinding;
 import com.example.homework44.ui.adapters.EpisodeAdapter;
 import com.example.homework44.base.BaseFragment;

@@ -4,18 +4,17 @@ package com.example.homework44.hilt.di;
 
 import android.content.Context;
 
-import com.example.homework44.data.local.AppDatabase;
-import com.example.homework44.data.local.RoomClient;
-import com.example.homework44.data.local.daos.CharacterDao;
-import com.example.homework44.data.local.daos.EpisodeDao;
-import com.example.homework44.data.local.daos.LocationDao;
+import com.example.homework44.hilt.data.local.AppDatabase;
+import com.example.homework44.hilt.data.local.RoomClient;
+import com.example.homework44.hilt.data.local.daos.CharacterDao;
+import com.example.homework44.hilt.data.local.daos.EpisodeDao;
+import com.example.homework44.hilt.data.local.daos.LocationDao;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
-import dagger.hilt.android.qualifiers.ActivityContext;
 import dagger.hilt.android.qualifiers.ApplicationContext;
 import dagger.hilt.components.SingletonComponent;
 

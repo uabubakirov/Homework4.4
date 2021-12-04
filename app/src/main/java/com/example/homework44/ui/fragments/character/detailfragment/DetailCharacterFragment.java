@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.homework44.data.network.dtos.character.Characters;
+import com.example.homework44.hilt.data.network.dtos.character.Characters;
 import com.example.homework44.databinding.FragmentDetailCharacterBinding;
 import com.example.homework44.base.BaseFragment;
 import com.example.homework44.ui.fragments.character.CharacterViewModel;

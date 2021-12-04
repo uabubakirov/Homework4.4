@@ -2,10 +2,7 @@ package com.example.homework44.ui.adapters;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
@@ -14,13 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.homework44.databinding.CharactersItemsBinding;
-import com.example.homework44.data.network.dtos.character.Characters;
+import com.example.homework44.hilt.data.network.dtos.character.Characters;
 import com.example.homework44.utils.OnItemClickCharacter;
 import com.example.homework44.utils.OnLongItemClick;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
 
 public class CharacterAdapter extends ListAdapter<Characters, CharacterAdapter.ViewHolder> {
 

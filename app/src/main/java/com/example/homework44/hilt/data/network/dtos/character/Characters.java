@@ -1,4 +1,4 @@
-package com.example.homework44.data.network.dtos.character;
+package com.example.homework44.hilt.data.network.dtos.character;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

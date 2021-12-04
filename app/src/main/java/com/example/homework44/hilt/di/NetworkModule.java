@@ -1,11 +1,9 @@
 package com.example.homework44.hilt.di;
 
-import com.example.homework44.data.network.RetrofitClient;
-import com.example.homework44.data.network.apiservice.CharacterApi;
-import com.example.homework44.data.network.apiservice.EpisodeApi;
-import com.example.homework44.data.network.apiservice.LocationApi;
-
-import java.security.Signature;
+import com.example.homework44.hilt.data.network.RetrofitClient;
+import com.example.homework44.hilt.data.network.apiservice.CharacterApi;
+import com.example.homework44.hilt.data.network.apiservice.EpisodeApi;
+import com.example.homework44.hilt.data.network.apiservice.LocationApi;
 
 import javax.inject.Singleton;
 

@@ -16,8 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
-import com.example.homework44.R;
-import com.example.homework44.data.network.dtos.character.Characters;
+import com.example.homework44.hilt.data.network.dtos.character.Characters;
 import com.example.homework44.databinding.FragmentImageBinding;
 import com.example.homework44.ui.fragments.character.CharacterViewModel;
 
