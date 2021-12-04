@@ -15,8 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.homework44.hilt.data.network.dtos.character.Characters;
-import com.example.homework44.hilt.data.repositories.CharacterRepositories;
+import com.example.homework44.data.network.dtos.character.Characters;
 import com.example.homework44.databinding.FragmentCharacterBinding;
 import com.example.homework44.ui.adapters.CharacterAdapter;
 import com.example.homework44.base.BaseFragment;
@@ -31,9 +30,9 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class CharacterFragment extends BaseFragment<CharacterViewModel, FragmentCharacterBinding> {
 
-    CharacterAdapter adapter;
+    private CharacterAdapter adapter;
     private LinearLayoutManager charactersLayoutManager;
-    CharacterRepositories characterRepositories;
+
 
 
     @Override
@@ -77,7 +76,7 @@ public class CharacterFragment extends BaseFragment<CharacterViewModel, Fragment
     @Override
     protected void setupRequests() {
 
-        if (internetCheck(getContext())){
+        if (internetCheck(requireContext())){
         binding.progressbarItems.setVisibility(View.VISIBLE);
         viewModel.fetchCharacters().observe(getViewLifecycleOwner(), characters -> {
             adapter.submitList(characters);
@@ -91,11 +90,14 @@ public class CharacterFragment extends BaseFragment<CharacterViewModel, Fragment
                         viewModel.fetchCharacters().observe(getViewLifecycleOwner(), new Observer<ArrayList<Characters>>() {
                             @Override
                             public void onChanged(ArrayList<Characters> characters) {
-                                ArrayList arrayList = new ArrayList(adapter.getCurrentList());
-                                arrayList.addAll(characters);
-                                adapter.submitList(arrayList);
-                                binding.progressbar.setVisibility(View.GONE);
-                            }
+                                if (!internetCheck(requireContext())){
+                                    binding.progressbar.setVisibility(View.GONE);
+                                }else {
+                                    ArrayList arrayList = new ArrayList(adapter.getCurrentList());
+                                    arrayList.addAll(characters);
+                                    adapter.submitList(arrayList);
+                                    binding.progressbar.setVisibility(View.GONE);
+                                }                            }
                         });
                     }
                 }

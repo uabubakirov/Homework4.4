@@ -1,12 +1,12 @@
-package com.example.homework44.hilt.data.repositories;
+package com.example.homework44.data.repositories;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.homework44.hilt.data.local.daos.LocationDao;
-import com.example.homework44.hilt.data.network.apiservice.LocationApi;
-import com.example.homework44.hilt.data.network.dtos.RickAndMortyResponse;
-import com.example.homework44.hilt.data.network.dtos.location.Locations;
+import com.example.homework44.data.local.daos.LocationDao;
+import com.example.homework44.data.network.apiservice.LocationApi;
+import com.example.homework44.data.network.dtos.RickAndMortyResponse;
+import com.example.homework44.data.network.dtos.location.Locations;
 
 import java.util.ArrayList;
 

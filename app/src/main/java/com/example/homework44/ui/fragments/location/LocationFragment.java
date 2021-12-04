@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.homework44.hilt.data.network.dtos.location.Locations;
+import com.example.homework44.data.network.dtos.location.Locations;
 import com.example.homework44.databinding.FragmentLocationBinding;
 import com.example.homework44.ui.adapters.LocationAdapter;
 import com.example.homework44.base.BaseFragment;
@@ -30,7 +30,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLocationBinding> {
 
-    LocationAdapter adapter;
+    private LocationAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,7 +52,7 @@ public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLo
 
     @Override
     protected void setupObservers() {
-        if(internetCheck(getContext())){
+        if(internetCheck(requireContext())){
         binding.progressbarItems.setVisibility(View.VISIBLE);
         viewModel.fetchLocations().observe(getViewLifecycleOwner(), new Observer<ArrayList<Locations>>() {
             @Override
@@ -69,11 +69,14 @@ public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLo
                             viewModel.fetchLocations().observe(getViewLifecycleOwner(), new Observer<ArrayList<Locations>>() {
                                 @Override
                                 public void onChanged(ArrayList<Locations> locations) {
+                                    if (!internetCheck(requireContext())){
+                                        binding.progressbar.setVisibility(View.GONE);
+                                    }else {
                                     ArrayList arrayList = new ArrayList(adapter.getCurrentList());
                                     arrayList.addAll(locations);
                                     adapter.submitList(arrayList);
                                     binding.progressbar.setVisibility(View.GONE);
-                                }
+                                }}
                             });
                         }
                     }

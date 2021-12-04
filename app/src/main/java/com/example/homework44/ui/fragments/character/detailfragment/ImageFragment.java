@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
-import com.example.homework44.hilt.data.network.dtos.character.Characters;
+import com.example.homework44.data.network.dtos.character.Characters;
 import com.example.homework44.databinding.FragmentImageBinding;
 import com.example.homework44.ui.fragments.character.CharacterViewModel;
 
@@ -27,8 +27,8 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class ImageFragment extends DialogFragment {
 
-    FragmentImageBinding binding;
-    CharacterViewModel viewModel;
+   private FragmentImageBinding binding;
+   private CharacterViewModel viewModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class ImageFragment extends DialogFragment {
     }
 
     private void getData() {
-        if(internetCheck(getContext())){
+        if(internetCheck(requireContext())){
         viewModel.fetchCharacter(ImageFragmentArgs.fromBundle(getArguments()).getId()).observe(getViewLifecycleOwner(), new Observer<Characters>() {
             @Override
             public void onChanged(Characters characters) {

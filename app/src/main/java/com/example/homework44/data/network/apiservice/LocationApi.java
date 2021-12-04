@@ -1,7 +1,7 @@
-package com.example.homework44.hilt.data.network.apiservice;
+package com.example.homework44.data.network.apiservice;
 
-import com.example.homework44.hilt.data.network.dtos.RickAndMortyResponse;
-import com.example.homework44.hilt.data.network.dtos.location.Locations;
+import com.example.homework44.data.network.dtos.RickAndMortyResponse;
+import com.example.homework44.data.network.dtos.location.Locations;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

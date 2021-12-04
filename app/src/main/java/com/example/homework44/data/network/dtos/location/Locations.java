@@ -1,20 +1,28 @@
-package com.example.homework44.hilt.data.network.dtos.episode;
+package com.example.homework44.data.network.dtos.location;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 @Entity
-public class Episodes {
+public class Locations {
     @PrimaryKey
     @SerializedName("id")
     private int id;
     @SerializedName("name")
     private String name;
-    @SerializedName("air_date")
-    private String airDate;
-    @SerializedName("episode")
-    private String episode;
+    @SerializedName("type")
+    private String type;
+    @SerializedName("dimension")
+    private String dimension;
+
+    public String getDimension() {
+        return dimension;
+    }
+
+    public void setDimension(String dimension) {
+        this.dimension = dimension;
+    }
 
     public int getId() {
         return id;
@@ -32,19 +40,11 @@ public class Episodes {
         this.name = name;
     }
 
-    public String getAirDate() {
-        return airDate;
+    public String getType() {
+        return type;
     }
 
-    public void setAirDate(String airDate) {
-        this.airDate = airDate;
-    }
-
-    public String getEpisode() {
-        return episode;
-    }
-
-    public void setEpisode(String episode) {
-        this.episode = episode;
+    public void setType(String type) {
+        this.type = type;
     }
 }

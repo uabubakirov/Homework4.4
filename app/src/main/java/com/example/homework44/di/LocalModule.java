@@ -1,14 +1,14 @@
-package com.example.homework44.hilt.di;
+package com.example.homework44.di;
 
 
 
 import android.content.Context;
 
-import com.example.homework44.hilt.data.local.AppDatabase;
-import com.example.homework44.hilt.data.local.RoomClient;
-import com.example.homework44.hilt.data.local.daos.CharacterDao;
-import com.example.homework44.hilt.data.local.daos.EpisodeDao;
-import com.example.homework44.hilt.data.local.daos.LocationDao;
+import com.example.homework44.data.local.AppDatabase;
+import com.example.homework44.data.local.RoomClient;
+import com.example.homework44.data.local.daos.CharacterDao;
+import com.example.homework44.data.local.daos.EpisodeDao;
+import com.example.homework44.data.local.daos.LocationDao;
 
 import javax.inject.Singleton;
 
@@ -22,7 +22,7 @@ import dagger.hilt.components.SingletonComponent;
 @InstallIn(SingletonComponent.class)
 public class LocalModule {
     @Singleton
-    private static RoomClient roomClient = new RoomClient();
+    private final RoomClient roomClient = new RoomClient();
     @Provides
     @Singleton
     AppDatabase provideDatabase(@ApplicationContext Context context){

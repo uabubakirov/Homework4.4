@@ -1,12 +1,12 @@
-package com.example.homework44.hilt.data.local;
+package com.example.homework44.data.local;
 
 import android.content.Context;
 
 import androidx.room.Room;
 
-import com.example.homework44.hilt.data.local.daos.CharacterDao;
-import com.example.homework44.hilt.data.local.daos.EpisodeDao;
-import com.example.homework44.hilt.data.local.daos.LocationDao;
+import com.example.homework44.data.local.daos.CharacterDao;
+import com.example.homework44.data.local.daos.EpisodeDao;
+import com.example.homework44.data.local.daos.LocationDao;
 
 public class RoomClient {
     public AppDatabase provideDatabase(Context context){

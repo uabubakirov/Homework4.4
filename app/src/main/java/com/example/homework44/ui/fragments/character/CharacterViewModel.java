@@ -2,9 +2,9 @@ package com.example.homework44.ui.fragments.character;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.homework44.hilt.data.local.daos.CharacterDao;
-import com.example.homework44.hilt.data.network.dtos.character.Characters;
-import com.example.homework44.hilt.data.repositories.CharacterRepositories;
+import com.example.homework44.data.local.daos.CharacterDao;
+import com.example.homework44.data.network.dtos.character.Characters;
+import com.example.homework44.data.repositories.CharacterRepositories;
 import com.example.homework44.base.BaseViewModel;
 
 import java.util.ArrayList;

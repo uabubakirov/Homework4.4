@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.homework44.hilt.data.network.dtos.episode.Episodes;
+import com.example.homework44.data.network.dtos.episode.Episodes;
 import com.example.homework44.databinding.FragmentEpisodeBinding;
 import com.example.homework44.ui.adapters.EpisodeAdapter;
 import com.example.homework44.base.BaseFragment;
@@ -27,7 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class EpisodeFragment extends BaseFragment<EpisodeViewModel, FragmentEpisodeBinding> {
 
-    EpisodeAdapter adapter;
+    private EpisodeAdapter adapter;
 
 
 
@@ -60,7 +60,7 @@ public class EpisodeFragment extends BaseFragment<EpisodeViewModel, FragmentEpis
 
     @Override
     protected void setupObservers() {
-        if (internetCheck(getContext())){
+        if (internetCheck(requireContext())){
         binding.progressbarItems.setVisibility(View.VISIBLE);
         viewModel.fetchEpisodes().observe(getViewLifecycleOwner(), new Observer<ArrayList<Episodes>>() {
             @Override
@@ -76,12 +76,15 @@ public class EpisodeFragment extends BaseFragment<EpisodeViewModel, FragmentEpis
                             viewModel.fetchEpisodes().observe(getViewLifecycleOwner(), new Observer<ArrayList<Episodes>>() {
                                 @Override
                                 public void onChanged(ArrayList<Episodes> list) {
+                                    if (!internetCheck(requireContext())){
+                                        binding.progressbar.setVisibility(View.GONE);
+                                    }else {
                                     ArrayList arrayList = new ArrayList(adapter.getCurrentList());
                                     arrayList.addAll(episodes);
                                     adapter.submitList(arrayList);
                                     binding.progressbar.setVisibility(View.GONE);
 
-                                }
+                                }}
                             });
                         }
                     }

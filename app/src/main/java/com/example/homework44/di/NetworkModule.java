@@ -1,9 +1,9 @@
-package com.example.homework44.hilt.di;
+package com.example.homework44.di;
 
-import com.example.homework44.hilt.data.network.RetrofitClient;
-import com.example.homework44.hilt.data.network.apiservice.CharacterApi;
-import com.example.homework44.hilt.data.network.apiservice.EpisodeApi;
-import com.example.homework44.hilt.data.network.apiservice.LocationApi;
+import com.example.homework44.data.network.RetrofitClient;
+import com.example.homework44.data.network.apiservice.CharacterApi;
+import com.example.homework44.data.network.apiservice.EpisodeApi;
+import com.example.homework44.data.network.apiservice.LocationApi;
 
 import javax.inject.Singleton;
 
@@ -16,7 +16,7 @@ import dagger.hilt.components.SingletonComponent;
 @InstallIn(SingletonComponent.class)
 public class NetworkModule {
     @Singleton
-    private static RetrofitClient retrofitClient = new RetrofitClient();
+    private final RetrofitClient retrofitClient = new RetrofitClient();
     @Provides
     @Singleton
     CharacterApi provideCharacterApi(){

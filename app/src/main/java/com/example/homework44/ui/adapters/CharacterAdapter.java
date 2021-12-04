@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.homework44.databinding.CharactersItemsBinding;
-import com.example.homework44.hilt.data.network.dtos.character.Characters;
+import com.example.homework44.data.network.dtos.character.Characters;
 import com.example.homework44.utils.OnItemClickCharacter;
 import com.example.homework44.utils.OnLongItemClick;
 

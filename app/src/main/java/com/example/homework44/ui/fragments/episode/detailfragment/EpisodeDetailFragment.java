@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.homework44.hilt.data.network.dtos.episode.Episodes;
+import com.example.homework44.data.network.dtos.episode.Episodes;
 import com.example.homework44.databinding.FragmentEpisodeDetailBinding;
 import com.example.homework44.base.BaseFragment;
 import com.example.homework44.ui.fragments.episode.EpisodeViewModel;
@@ -37,7 +37,7 @@ public class EpisodeDetailFragment extends BaseFragment<EpisodeViewModel, Fragme
 
     @Override
     protected void setupObservers() {
-        if (internetCheck(getContext())){
+        if (internetCheck(requireContext())){
         viewModel.fetchEpisode(EpisodeDetailFragmentArgs.fromBundle(getArguments()).getId()).observe(getViewLifecycleOwner(), new Observer<Episodes>() {
             @Override
             public void onChanged(Episodes episodes) {

@@ -1,8 +1,8 @@
-package com.example.homework44.hilt.data.network;
+package com.example.homework44.data.network;
 
-import com.example.homework44.hilt.data.network.apiservice.CharacterApi;
-import com.example.homework44.hilt.data.network.apiservice.EpisodeApi;
-import com.example.homework44.hilt.data.network.apiservice.LocationApi;
+import com.example.homework44.data.network.apiservice.CharacterApi;
+import com.example.homework44.data.network.apiservice.EpisodeApi;
+import com.example.homework44.data.network.apiservice.LocationApi;
 
 import java.util.concurrent.TimeUnit;
 

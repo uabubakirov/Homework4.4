@@ -1,4 +1,4 @@
-package com.example.homework44.hilt.data.local.daos;
+package com.example.homework44.data.local.daos;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.homework44.hilt.data.network.dtos.location.Locations;
+import com.example.homework44.data.network.dtos.location.Locations;
 
 import java.util.ArrayList;
 import java.util.List;

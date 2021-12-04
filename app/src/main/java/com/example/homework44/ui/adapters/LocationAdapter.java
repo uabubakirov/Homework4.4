@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.homework44.hilt.data.network.dtos.location.Locations;
+import com.example.homework44.data.network.dtos.location.Locations;
 import com.example.homework44.databinding.LocationItemsBinding;
 import com.example.homework44.utils.OnItemClickLocation;
 
