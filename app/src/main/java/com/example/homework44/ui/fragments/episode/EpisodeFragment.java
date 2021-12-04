@@ -77,6 +77,7 @@ public class EpisodeFragment extends BaseFragment<EpisodeViewModel, FragmentEpis
                                 @Override
                                 public void onChanged(ArrayList<Episodes> list) {
                                     if (!internetCheck(requireContext())){
+                                        adapter.submitList(viewModel.getDataFromDb());
                                         binding.progressbar.setVisibility(View.GONE);
                                     }else {
                                     ArrayList arrayList = new ArrayList(adapter.getCurrentList());

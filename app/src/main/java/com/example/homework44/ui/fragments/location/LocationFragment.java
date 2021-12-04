@@ -70,6 +70,7 @@ public class LocationFragment extends BaseFragment<LocationViewModel, FragmentLo
                                 @Override
                                 public void onChanged(ArrayList<Locations> locations) {
                                     if (!internetCheck(requireContext())){
+                                        adapter.submitList(viewModel.getDataFromDb());
                                         binding.progressbar.setVisibility(View.GONE);
                                     }else {
                                     ArrayList arrayList = new ArrayList(adapter.getCurrentList());
